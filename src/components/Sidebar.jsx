@@ -4,8 +4,9 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme } from 'antd';
-import { MdLocationCity, MdModeOfTravel } from 'react-icons/md';
-import { FaHotel } from 'react-icons/fa';
+import { MdFavorite, MdRecentActors, MdStoreMallDirectory } from 'react-icons/md';
+import { Link, Outlet } from 'react-router-dom';
+import { TbCategoryFilled } from 'react-icons/tb';
 const { Header, Sider, Content } = Layout;
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -26,21 +27,31 @@ const Sidebar = () => {
           items={[
             {
               key: '1',
-              icon: <MdModeOfTravel />,
-              label: 'Travel',
+              icon: <MdRecentActors />,
+              label: <Link to={"/travel"}>Actor</Link>,
             },
             {
               key: '2',
-              icon: <MdLocationCity />,
-              label: 'Cities',
+              icon: <TbCategoryFilled />,
+              label: <Link to="/categorys">Category</Link>,
             },
             {
               key: '3',
-              icon: <FaHotel />,
-              label: 'Hotel',
+              icon: <MdStoreMallDirectory />,
+              label: <Link to={"/director"}>Director</Link>,
             },
-          ]}
-        />
+            {
+              key: '4',
+              icon: <MdFavorite />,
+              label: <Link to={"/favorite"}>Favorite</Link>,
+            },
+            {
+             key: '5',
+             label: ( <Link to="/genre" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+             <img style={{borderRadius:"50px"}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrwSRPKVFKgCoOAG0zHW8jEzKTWkn68j39gg&s" alt="genre" style={{ width: 18, height: 18 }}/>
+             <span>Genre</span>
+            </Link> ),
+            }]}/>
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
@@ -59,12 +70,13 @@ const Sidebar = () => {
           style={{
             margin: '24px 16px',
             padding: 24,
-            minHeight: 280,
+            height: '80vh',
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
+            overflowY: "auto"
           }}
         >
-          Content
+          <Outlet/>
         </Content>
       </Layout>
     </Layout>

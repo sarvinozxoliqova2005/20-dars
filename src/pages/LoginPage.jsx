@@ -9,7 +9,7 @@ const LoginPage = () => {
     const onFinish = async values => {
   console.log('Success:', values);
   try {
-  let res = await axios.post("https://v1.turbotravel.uz/api/auth/signin", values);
+  let res = await axios.post("https://dummyjson.com/auth/login", values);
   const token = res?.data?.data?.tokens?.accessToken?.token;
   localStorage.setItem("token" , token);
   navigate("/travel")
@@ -36,8 +36,8 @@ const onFinishFailed = errorInfo => {
   >
     <Form.Item
       layout='vertical'
-      label="Phone Number"
-      name="phone_number"
+      label="Enter username"
+      name="username"
       rules={[{ required: true, message: 'Please input your username!' }]}
     >
       <Input />
