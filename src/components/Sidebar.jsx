@@ -7,6 +7,7 @@ import { Button, Layout, Menu, theme } from 'antd';
 import { MdFavorite, MdRecentActors, MdStoreMallDirectory } from 'react-icons/md';
 import { Link, Outlet } from 'react-router-dom';
 import { TbCategoryFilled } from 'react-icons/tb';
+import { RiMovie2Line } from 'react-icons/ri';
 const { Header, Sider, Content } = Layout;
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -51,7 +52,16 @@ const Sidebar = () => {
              <img style={{borderRadius:"50px"}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrwSRPKVFKgCoOAG0zHW8jEzKTWkn68j39gg&s" alt="genre" style={{ width: 18, height: 18 }}/>
              <span>Genre</span>
             </Link> ),
-            }]}/>
+            },
+
+            {
+              key: '6',
+              icon: <RiMovie2Line />,
+              label: <Link to={"/movie"}>Movie</Link>,
+            },
+          ]}   
+            />
+            
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>

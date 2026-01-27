@@ -44,7 +44,7 @@ const DirectorModal = ({ open , setOpen , editDatas , form , directorId , setDir
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        + Add Actors
+        + Add Directors      
       </Button>
 
       <Modal

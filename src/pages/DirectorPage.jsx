@@ -1,16 +1,30 @@
 import { Button, Flex, Form, Image, Space, Table, Tag } from 'antd';
-import useGet from '../hooks/useGet';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useState } from 'react';
 import DirectorModal from '../components/DirectorModal';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const DirectorPage = () => {
-  const {data , getData} = useGet ({url:"director"});
     const [open, setOpen] = useState(false);
     const [editDatas , setEditDatas] = useState(null);
       const [form] = Form.useForm();
       const [directorId , setDirectorId] = useState(null);
+      const queryClient = useQueryClient();
+
+const getData = async () => {
+const res = await axios.get("https://x8ki-letl-twmt.n7.xano.io/api:j6hO02gL/director");
+return res.data;
+};
+
+
+const { data:directors } = useQuery({
+queryKey: ["director"],
+queryFn: getData,
+staleTime: 60000,
+});
+
+const data = directors?.data
     
 
   const editData = (el) => {
@@ -24,7 +38,7 @@ const DirectorPage = () => {
         try {
             await axios.delete(`https://x8ki-letl-twmt.n7.xano.io/api:j6hO02gL/director/${id}`);
             toast.success ("Data deleted successfully");
-            getData()
+            queryClient.invalidateQueries({queryKey: ["director"]});
         } catch (error) {
             console.log(error);
         }
